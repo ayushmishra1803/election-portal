@@ -17,6 +17,8 @@ const PartySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User",
+
+    unique: true,
   },
 
   members: [
@@ -29,9 +31,14 @@ const PartySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User",
+        unique: true,
       },
     },
   ],
+  approved: {
+    type: Boolean,
+    required: true,
+  },
 });
-const PartyModel=new mongoose.model('Party',PartySchema)
-module.exports=PartyModel
+const PartyModel = new mongoose.model("Party", PartySchema);
+module.exports = PartyModel;
