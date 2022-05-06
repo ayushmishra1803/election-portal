@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { required } = require("nodemon/lib/config");
-const bcryptjs=require('bcryptjs')
+const bcryptjs = require("bcryptjs");
+const jwt=required('jsonwebtoken')
 const UserSchema = new mongoose.Schema({
   first_name: {
     type: String,
@@ -12,7 +13,8 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,unique:true
+    required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -22,13 +24,40 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  token: {
+    type: String,
+  },
 });
-UserSchema.pre('save',async function(next){
-    const user=this;
-    if(user.isModified('password')){
-        user.password=await bcryptjs.hash(user.password,8)
-    }
-    next();
-})
+UserSchema.pre("save", async function (next) {
+  const user = this;
+  if (user.isModified("password")) {
+    user.password = await bcryptjs.hash(user.password, 8);
+  }
+  next();
+});
+UserSchema.statics.findByCred = async (email, password, userType) => {
+  const user = await UserModel.findOne({ email: email, user_type: userType });
+  if (!user) {
+    throw new Error("User not fond");
+  }
+  const match = await bcryptjs.compare(password, user.password);
+  if (!match) {
+    throw new Error("Password invalid");
+  }
+  return user;
+};
+UserSchema.methods.generateToken=async function(){
+  const user=this
+  const token=await jwt.sign(
+    { _id: user._id.toString() },
+    "Investment_Trakcer"
+  );
+  user.access_token = token;
+  const saved = await user.save();
+  if (!saved) {
+    throw new Error("PLease Try Again");
+  }
+  return token;
+}
 const UserModel = new mongoose.model("User", UserSchema);
-module.exports=UserModel
+module.exports = UserModel;

@@ -33,4 +33,10 @@ PartyRoutes.get(`/parties`,async(req,res)=>{
     res.status(400).send({message:err.message})
   }
 })
+PartyRoutes.patch('/add-member/:memberId',async(req,res)=>{
+  try{
+    const {memberId}=req.params
+    console.log(memberId);
+  }catch(err){}
+})
 module.exports = PartyRoutes;
