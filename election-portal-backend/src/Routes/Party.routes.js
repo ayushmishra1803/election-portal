@@ -38,6 +38,10 @@ PartyRoutes.get(`/parties`, AdminMiddleware, async (req, res) => {
 PartyRoutes.patch("/add-member/:memberId", async (req, res) => {
   try {
     const { memberId } = req.params;
+    const partyDetails = await PartyModel.find({ party_admin: req.user._id });
+    if(!partyDetails){
+      throw new Error('Party detials not found')
+    }
   } catch (err) {}
 });
 
