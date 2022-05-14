@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  token: {
+  access_token: {
     type: String,
   },
 });
@@ -50,7 +50,7 @@ UserSchema.methods.generateToken=async function(){
   const user=this
   const token=await jwt.sign(
     { _id: user._id.toString() },
-    "Investment_Trakcer"
+    "Election_portal"
   );
   user.access_token = token;
   const saved = await user.save();

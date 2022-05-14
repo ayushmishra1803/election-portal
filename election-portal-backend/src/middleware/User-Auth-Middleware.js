@@ -3,8 +3,8 @@ const UserModel = require("../Models/user.model");
 const UserAuthMiddleware = async (req, res, next) => {
     try {
         const token = req.header(`Authorization`).replace("Bearer ", "");
-        const decode = await jwt.verify(token, "Investment_Trakcer");
-    
+        const decode = await jwt.verify(token, "Election_portal");
+   
         if (!decode) {
           throw new Error("Token expired, Please login again");
         }

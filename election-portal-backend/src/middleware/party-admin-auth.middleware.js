@@ -2,13 +2,13 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../Models/user.model");
 const PartyAminMiddleware = async (req, res, next) => {
     try {
-        const token = req.header(`Authorization`).replace("Bearer ", "");
-        const decode = await jwt.verify(token, "Investment_Trakcer");
     
+        const token = req.header(`Authorization`).replace("Bearer ", "");
+        const decode = await jwt.verify(token,"Election_portal")
         if (!decode) {
           throw new Error("Token expired, Please login again");
         }
-        const user = await UserModel.findById({ _id: decode._id,user_type:'party_admin' });
+        const user = await UserModel.findById({ _id: decode._id,user_type:'party_admin'});
         if (!user) {
           throw new Error("User not found");
         }

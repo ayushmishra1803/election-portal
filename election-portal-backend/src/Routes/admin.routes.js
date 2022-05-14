@@ -5,7 +5,6 @@ const PartyModel = require("../Models/party.model");
 AdminRoutes.patch("/party-approvals/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const partyData = await PartyModel.findById(id);
     if (!partyData) {
       throw new Error("Party not found");

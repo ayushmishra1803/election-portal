@@ -9,7 +9,7 @@ const AuthRoutes=require('./Routes/auth.routes')
 app.use(express.json())
 app.use(cors());
 app.use(UserRoutes)
-app.use(PartyRoutes)
+app.use('/parties',PartyRoutes)
 app.use('/admin',AdminRoutes)
 app.use('/auth',AuthRoutes)
 app.listen(3000, () => {
