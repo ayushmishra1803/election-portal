@@ -88,4 +88,5 @@ UserRoutes.post(`/sign-up`,async (req,res)=>{
         res.status(400).send({message:err.message})
     }
 })
+
 module.exports=UserRoutes

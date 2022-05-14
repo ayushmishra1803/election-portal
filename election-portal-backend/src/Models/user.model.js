@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { required } = require("nodemon/lib/config");
 const bcryptjs = require("bcryptjs");
-const jwt=required('jsonwebtoken')
+const jwt=require('jsonwebtoken')
 const UserSchema = new mongoose.Schema({
   first_name: {
     type: String,
