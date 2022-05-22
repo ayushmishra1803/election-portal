@@ -33,6 +33,9 @@ const PartySchema = new mongoose.Schema({
         ref: "User",
         unique: true,
       },
+      approved:{
+        type:Boolean,required:true
+      }
     },
   ],
   approved: {

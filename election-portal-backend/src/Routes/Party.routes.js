@@ -98,13 +98,20 @@ PartyRoutes.get(`/approve/:userId`, PartAdminMiddleware, async (req, res) => {
   try {
     console.log(req.params);
     const party=await PartyModel.find({party_admin:req.user._id})
-    console.log(party[0]);
-    const updatedMembers=party[0].members.map(member=>{if(member.UserId == req.params.userId){
-      return {...member,approved:true}
-    }else{
-      return member
-    }})
-    console.log(updatedMembers);
-  } catch (err) {}
+   
+     const updatedIndex=party[0].members.findIndex(member=>member.UserId == req.params.userId)
+     console.log(party,updatedIndex);
+     party[0].members[updatedIndex].approved=true 
+        const saved=await party[0].save();
+    if(!saved){
+      throw new Error("Member not approved")
+    }
+    res.status(200).send({
+      message:'Memeber approved to join party',data:party[0]
+    })
+   
+  } catch (err) {
+res.status(500).send({message:err.message})
+  }
 });
 module.exports = PartyRoutes;
