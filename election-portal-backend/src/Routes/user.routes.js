@@ -91,10 +91,5 @@ UserRoutes.get(`/users`, async (req, res) => {
   }
 });
 
-UserRoutes.post(`/parties/request-member/:party_id`, async (req, res) => {
-  try {
-      const {party_id}=req.params
-      console.log(party_id);
-  } catch (err) {}
-});
+
 module.exports = UserRoutes;

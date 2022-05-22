@@ -3,7 +3,8 @@ const PartyRoutes = new express.Router();
 const PartyModel = require("../Models/party.model");
 const AdminMiddleware = require("../middleware/Admin-middleware");
 const PartAdminMiddleware = require("../middleware/party-admin-auth.middleware");
-const GeneralMiddleware=require('../middleware/general.middleware')
+const GeneralMiddleware = require("../middleware/general.middleware");
+const UserAuthMiddleware = require("../middleware/User-Auth-Middleware");
 PartyRoutes.post(`/create-party`, async (req, res) => {
   try {
     const party = new PartyModel({ ...req.body, approved: false });
@@ -40,8 +41,8 @@ PartyRoutes.patch("/add-member/:memberId", async (req, res) => {
   try {
     const { memberId } = req.params;
     const partyDetails = await PartyModel.find({ party_admin: req.user._id });
-    if(!partyDetails){
-      throw new Error('Party detials not found')
+    if (!partyDetails) {
+      throw new Error("Party detials not found");
     }
   } catch (err) {}
 });
@@ -63,4 +64,47 @@ PartyRoutes.get(`/deatils`, GeneralMiddleware, async (req, res) => {
   }
 });
 
+//request to join party
+PartyRoutes.patch(`/request/:partyId`, UserAuthMiddleware, async (req, res) => {
+  try {
+    console.log(req.params.partyId);
+    const party = await PartyModel.find({ _id: req.params.partyId });
+    const Alreadymember = await PartyModel.find({
+      members: { $elemMatch: { UserId: req.user._id } },
+    });
+    if (Alreadymember.length > 0) {
+      throw new Error("You are already a member of a party");
+    } else {
+      const member = {
+        position: req.body.position,
+        approved: false,
+        UserId: req.user._id,
+      };
+      party[0].members.push(member);
+      console.log(party);
+    }
+    const saved = party[0].save();
+    if (!saved) {
+      throw new Error("Request not send");
+    }
+
+    res.status(200).send({ message: "Request Send", data: party });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+//approve user
+PartyRoutes.get(`/approve/:userId`, PartAdminMiddleware, async (req, res) => {
+  try {
+    console.log(req.params);
+    const party=await PartyModel.find({party_admin:req.user._id})
+    console.log(party[0]);
+    const updatedMembers=party[0].members.map(member=>{if(member.UserId == req.params.userId){
+      return {...member,approved:true}
+    }else{
+      return member
+    }})
+    console.log(updatedMembers);
+  } catch (err) {}
+});
 module.exports = PartyRoutes;
