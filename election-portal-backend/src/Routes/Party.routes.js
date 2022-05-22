@@ -3,6 +3,7 @@ const PartyRoutes = new express.Router();
 const PartyModel = require("../Models/party.model");
 const AdminMiddleware = require("../middleware/Admin-middleware");
 const PartAdminMiddleware = require("../middleware/party-admin-auth.middleware");
+const GeneralMiddleware=require('../middleware/general.middleware')
 PartyRoutes.post(`/create-party`, async (req, res) => {
   try {
     const party = new PartyModel({ ...req.body, approved: false });
@@ -46,7 +47,7 @@ PartyRoutes.patch("/add-member/:memberId", async (req, res) => {
 });
 
 //get party details
-PartyRoutes.get(`/deatils`, PartAdminMiddleware, async (req, res) => {
+PartyRoutes.get(`/deatils`, GeneralMiddleware, async (req, res) => {
   try {
     const partyDetails = await PartyModel.find({ party_admin: req.user._id });
     if (!partyDetails) {
