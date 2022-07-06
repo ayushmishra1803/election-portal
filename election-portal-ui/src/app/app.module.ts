@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/module/shared.module';
 import { LandingComponent } from './pages/landing/landing.component';
 import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.component';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.compon
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

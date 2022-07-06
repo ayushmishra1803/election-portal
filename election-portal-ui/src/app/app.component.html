@@ -3,7 +3,10 @@
     ><app-sidebar></app-sidebar
   ></mat-drawer>
   <mat-drawer-content>
-    <app-header (toggleSidebarEvent)="toggleSidebar($event)"></app-header>
+    <app-header
+      class="header"
+      (toggleSidebarEvent)="toggleSidebar($event)"
+    ></app-header>
     <div>
       <div class="page-wrapper">
         <router-outlet></router-outlet>

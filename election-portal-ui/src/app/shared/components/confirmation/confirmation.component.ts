@@ -16,4 +16,7 @@ export class ConfirmationComponent implements OnInit {
   onNoClick() {
     this.dialogRef.close();
   }
+  oNClick() {
+    this.dialogRef.close(true);
+  }
 }

@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './pages/landing/landing.component';
 import { AdminGuard } from './shared/Guard/admin/admin.guard';
+import { NotLoggedGuard } from './shared/Guard/not-loggedIn/not-logged.guard';
 import { PartyAdminGuard } from './shared/Guard/party-admin/party-admin.guard';
 import { UserGuard } from './shared/Guard/user/user.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
+    canActivate: [NotLoggedGuard],
     loadChildren: () =>
       import(`./pages/auth/user-login/user-login.module`).then(
         (m) => m.UserloginModule

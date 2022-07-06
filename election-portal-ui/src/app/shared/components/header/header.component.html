@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
   <button
+    *ngIf="showMenu"
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with menu icon"
@@ -10,32 +11,25 @@
   <span class="example-spacer"></span>
   <button
     mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button
-    mat-icon-button
     [matMenuTriggerFor]="menu"
     aria-label="Example icon-button with a menu"
   >
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button routerLink="auth/login" mat-menu-item *ngIf="!showMenu">
       <mat-icon>login</mat-icon>
       <span>Login</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="logout()" *ngIf="showMenu">
       <mat-icon>logout</mat-icon>
       <span>Logout</span>
     </button>
-    <button mat-menu-item>
+    <button routerLink="auth/signup" mat-menu-item *ngIf="!showMenu">
       <mat-icon>account_circle</mat-icon>
       <span>Register</span>
     </button>
-    <button mat-menu-item>
+    <button routerLink="admin" mat-menu-item *ngIf="isAdmin">
       <mat-icon>admin_panel_settings</mat-icon>
       <span>Admin Panel</span>
     </button>

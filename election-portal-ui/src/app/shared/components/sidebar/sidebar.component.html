@@ -1,15 +1,13 @@
-<mat-list>
-  <div mat-subheader>Folders</div>
-  <mat-list-item *ngFor="let folder of folders">
-    <mat-icon mat-list-icon>folder</mat-icon>
+<mat-list *ngIf="showFolder || showNotes">
+  <div *ngIf="showFolder" mat-subheader>Menu</div>
+  <mat-list-item [routerLink]="folder.route" *ngFor="let folder of folders">
+    <mat-icon mat-list-icon>{{ folder.icon }}</mat-icon>
     <div mat-line>{{ folder.name }}</div>
-    <div mat-line>{{ folder.updated | date }}</div>
   </mat-list-item>
-  <mat-divider></mat-divider>
-  <div mat-subheader>Notes</div>
-  <mat-list-item *ngFor="let note of notes">
-    <mat-icon mat-list-icon>note</mat-icon>
+  <mat-divider *ngIf="showNotes"></mat-divider>
+  <div *ngIf="showNotes" mat-subheader>Account</div>
+  <mat-list-item [routerLink]="note.route" *ngFor="let note of notes">
+    <mat-icon mat-list-icon>{{ note.icon }}</mat-icon>
     <div mat-line>{{ note.name }}</div>
-    <div mat-line>{{ note.updated | date }}</div>
   </mat-list-item>
 </mat-list>

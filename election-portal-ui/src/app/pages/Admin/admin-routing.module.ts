@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddPartyMembersComponent } from './add-party-members/add-party-members.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
+import { AdminListComponent } from './admin-list/admin-list.component';
 import { CreateElectionComponent } from './create-election/create-election.component';
 import { ElectionDetailsComponent } from './election-details/election-details.component';
 import { ListElectionsComponent } from './list-elections/list-elections.component';
@@ -12,6 +14,10 @@ const routes: Routes = [
     path: '',
     component: AdminLayoutComponent,
     children: [
+      {
+        path: 'admin-list',
+        component: AdminListComponent,
+      },
       {
         path: 'party-list',
         component: PartyListComponent,
@@ -29,12 +35,16 @@ const routes: Routes = [
         component: CreateElectionComponent,
       },
       {
-        path: 'view-election/:id',
+        path: 'profile',
         component: ElectionDetailsComponent,
       },
       {
         path: 'elections',
         component: ListElectionsComponent,
+      },
+      {
+        path: 'password',
+        component: AddPartyMembersComponent,
       },
     ],
   },

@@ -26,8 +26,6 @@ export class ErrorHandlingService {
         });
       }
       if (err?.error?.message) {
-        console.log(err.error);
-
         this.snackBarService.showSnackBar(err.error.message, false);
       } else {
         this.snackBarService.showSnackBar(

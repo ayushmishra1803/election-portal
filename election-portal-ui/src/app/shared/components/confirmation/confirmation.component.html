@@ -1,38 +1,8 @@
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{ data.title }}</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
-          (click)="onNoClick()"
-        </button>
-      </div>
-      <div class="modal-body" mat-dialog-content>
-        <p>{{ data.description }}</p>
-      </div>
-      <div class="modal-footer" mat-dialog-actions>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-          (click)="onNoClick()"
-        >
-          Close
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          [mat-dialog-close]="true"
-          cdkFocusInitial
-        >
-          Proceed
-        </button>
-      </div>
-    </div>
-  </div>
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  {{ data.description }}
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button (click)="oNClick()">Proceed</button>
 </div>

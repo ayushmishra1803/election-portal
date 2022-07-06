@@ -10,6 +10,7 @@ import { AddPartyMembersComponent } from './add-party-members/add-party-members.
 import { CreateElectionComponent } from './create-election/create-election.component';
 import { ListElectionsComponent } from './list-elections/list-elections.component';
 import { ElectionDetailsComponent } from './election-details/election-details.component';
+import { AdminListComponent } from './admin-list/admin-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ElectionDetailsComponent } from './election-details/election-details.co
     AddPartyMembersComponent,
     CreateElectionComponent,
     ListElectionsComponent,
-    ElectionDetailsComponent
+    ElectionDetailsComponent,
+    AdminListComponent
   ],
   imports: [CommonModule, AdminRoutingModule, SharedModule],
   providers: [],

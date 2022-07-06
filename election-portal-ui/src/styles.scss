@@ -18,3 +18,15 @@ body {
   background-color: rgb(76, 175, 80);
   color: white;
 }
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+.mat-card {
+  border-radius: 20px !important;
+  box-shadow: none !important;
+  width: 100%;
+}
