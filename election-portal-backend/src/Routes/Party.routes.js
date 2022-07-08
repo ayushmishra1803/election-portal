@@ -6,6 +6,7 @@ const PartAdminMiddleware = require("../middleware/party-admin-auth.middleware")
 const GeneralMiddleware = require("../middleware/general.middleware");
 const UserAuthMiddleware = require("../middleware/User-Auth-Middleware");
 PartyRoutes.post(`/create-party`, async (req, res) => {
+  
   try {
     const party = new PartyModel({ ...req.body, approved: false });
     if (!party) {

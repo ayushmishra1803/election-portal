@@ -21,23 +21,24 @@ const PartySchema = new mongoose.Schema({
     unique: true,
   },
 
-  members: [
+ /*  members: [
     {
       position: {
         type: String,
-        required: true,
+        
       },
       UserId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        
         ref: "User",
         unique: true,
       },
-      approved:{
-        type:Boolean,required:true
-      }
+      member_approved: {
+        type: Boolean,
+        
+      },
     },
-  ],
+  ], */
   approved: {
     type: Boolean,
     required: true,
