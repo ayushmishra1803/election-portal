@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserInfoService } from 'src/app/shared/services/userInfo/user-info.service';
+import { CreatePartyComponent } from '../create-party/create-party.component';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -14,7 +16,8 @@ export class PartyAdminSignupComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userInfoService: UserInfoService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
   signUpForm: FormGroup = new FormGroup({
     first_name: new FormControl('', [Validators.required]),
@@ -25,14 +28,13 @@ export class PartyAdminSignupComponent implements OnInit {
   ngOnInit(): void {}
   submitSignUpForm() {
     if (this.signUpForm.valid) {
-      this.authService
-        .signUp(this.signUpForm.value, 'party_admin')
-        ?.subscribe((signUpData: any) => {
-          if (signUpData) {
-            console.log(signUpData);
-            this.router.navigate(['/auth/login']);
-          }
-        });
+      this.dialog.open(CreatePartyComponent, {
+        disableClose: true,
+        minWidth: '500px',
+        data: {
+          signUpForm: this.signUpForm.value,
+        },
+      });
     }
   }
 }

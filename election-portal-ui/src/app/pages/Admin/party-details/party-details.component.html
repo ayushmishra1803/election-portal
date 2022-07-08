@@ -1,7 +1,35 @@
 <div class="container">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div
+        mat-card-avatar
+        class="example-header-image"
+        [ngStyle]="{
+          'background-image': 'url(' + currentData?.party_icon + ')'
+        }"
+      ></div>
+      <mat-card-title class="title"
+        >{{ currentData?.party_name }}
+        <mat-icon *ngIf="currentData?.approved" class="green"
+          >verified</mat-icon
+        ></mat-card-title
+      >
+      <mat-card-subtitle>{{ currentData?.slogan }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        <b>Party Admin :</b>
+        <span
+          >{{ currentData?.party_admin?.first_name }}
+          {{ currentData?.party_admin?.last_name }}</span
+        >
+      </p>
+      <p><b>Email :</b> {{ currentData?.party_admin?.email }}</p>
+    </mat-card-content>
+  </mat-card>
   <mat-card>
     <mat-card-title>{{ currentData.party }}</mat-card-title>
-    <mat-card-subtitle>List Of members of The Parties</mat-card-subtitle>
+    <mat-card-subtitle>List Of members of The Party</mat-card-subtitle>
     <mat-card-content
       ><mat-form-field appearance="outline">
         <mat-label>Filter</mat-label>
@@ -18,23 +46,25 @@
           <!-- ID Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>Serial#</th>
-            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+            <td mat-cell *matCellDef="let row; let index = index">
+              {{ index + 1 }}
+            </td>
           </ng-container>
           <!-- Progress Column -->
           <ng-container matColumnDef="party-name">
-            <th mat-header-cell *matHeaderCellDef>Party</th>
-            <td mat-cell *matCellDef="let row">{{ row.party }}</td>
+            <th mat-header-cell *matHeaderCellDef>Member Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.UserId }}</td>
           </ng-container>
           <!-- Progress Column -->
           <ng-container matColumnDef="winning-rate">
-            <th mat-header-cell *matHeaderCellDef>Age</th>
-            <td mat-cell *matCellDef="let row">{{ row.progress }}</td>
+            <th mat-header-cell *matHeaderCellDef>Position</th>
+            <td mat-cell *matCellDef="let row">{{ row.position }}</td>
           </ng-container>
 
           <!-- Name Column -->
           <ng-container matColumnDef="admin">
-            <th mat-header-cell *matHeaderCellDef>Member Name</th>
-            <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            <th mat-header-cell *matHeaderCellDef>Approved</th>
+            <td mat-cell *matCellDef="let row">{{ row.approved }}</td>
           </ng-container>
 
           <!-- Fruit Column -->

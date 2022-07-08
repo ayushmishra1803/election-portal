@@ -12,6 +12,7 @@ import { SharedModule } from './shared/module/shared.module';
 import { LandingComponent } from './pages/landing/landing.component';
 import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.component';
 import { CommonModule } from '@angular/common';
+import { CreatePartyComponent } from './pages/auth/create-party/create-party.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +22,7 @@ import { CommonModule } from '@angular/common';
     AdminSignUpComponent,
     LandingComponent,
     AuthLayoutComponent,
+    CreatePartyComponent,
   ],
   imports: [
     BrowserModule,

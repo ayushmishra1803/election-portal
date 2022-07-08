@@ -6,8 +6,27 @@ table {
   font-size: 14px;
   width: 100%;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+}
 
 td,
 th {
   width: 25%;
+}
+
+.example-card {
+  margin-bottom: 20px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+.green {
+  color: rgb(80, 207, 80);
+}
+.title {
+  align-items: center;
+  display: flex;
 }

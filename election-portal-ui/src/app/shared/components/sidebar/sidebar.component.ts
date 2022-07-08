@@ -35,6 +35,17 @@ export class SidebarComponent implements OnInit {
           this.folders = [
             {
               icon: 'groups',
+              name: 'Users',
+              route: '/admin/users',
+            },
+            {
+              icon: 'groups',
+              name: 'Party Admins',
+              route: '/admin/party_admins',
+            },
+
+            {
+              icon: 'groups',
               name: 'Admin Members',
               route: '/admin/admin-list',
             },
@@ -64,23 +75,23 @@ export class SidebarComponent implements OnInit {
 
           this.showFolder = true;
           this.showNotes = true;
-        } else if (userData.user_type === 'party-admin') {
+        } else if (userData.user_type === 'party_admin') {
           this.folders = [
             {
               icon: 'groups',
               name: 'Members',
-              route: 'party-admin/members',
+              route: 'party_admin/members',
             },
           ];
           this.notes = [
             {
               name: 'Profile',
-              route: 'party-admin/profile',
+              route: 'party_admin/profile',
               icon: 'account_circle',
             },
             {
               name: 'Security',
-              route: 'party-admin/security',
+              route: 'party_admin/security',
               icon: 'lock',
             },
           ];

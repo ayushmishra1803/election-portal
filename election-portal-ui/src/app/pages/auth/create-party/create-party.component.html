@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Create Party</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="partyForm">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Party Name</mat-label>
+        <input formControlName="party_name" matInput placeholder="Party Name" />
+        <mat-icon matSuffix>3p</mat-icon>
+      </mat-form-field>
+      <mat-hint>Enter Party Name</mat-hint>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Add party icon url</mat-label>
+        <input
+          formControlName="party_icon"
+          matInput
+          placeholder="Party Icon URL"
+        />
+        <mat-icon matSuffix>image</mat-icon>
+      </mat-form-field>
+      <mat-hint>Enter Party Icon URL</mat-hint>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter Party Slogan</mat-label>
+        <input formControlName="slogan" matInput placeholder="Party Slogan" />
+        <mat-icon matSuffix>comment</mat-icon>
+      </mat-form-field>
+      <mat-hint>Enter Party Slogan</mat-hint>
+    </p>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="partyForm.invalid"
+    (click)="addParty()"
+  >
+    Create
+  </button>
+</mat-dialog-actions>

@@ -11,6 +11,8 @@ import { CreateElectionComponent } from './create-election/create-election.compo
 import { ListElectionsComponent } from './list-elections/list-elections.component';
 import { ElectionDetailsComponent } from './election-details/election-details.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
+import { UsersListComponent } from './users-list/users-list.component';
+import { PartyAdminListComponent } from './party-admin-list/party-admin-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AdminListComponent } from './admin-list/admin-list.component';
     CreateElectionComponent,
     ListElectionsComponent,
     ElectionDetailsComponent,
-    AdminListComponent
+    AdminListComponent,
+    UsersListComponent,
+    PartyAdminListComponent
   ],
   imports: [CommonModule, AdminRoutingModule, SharedModule],
   providers: [],

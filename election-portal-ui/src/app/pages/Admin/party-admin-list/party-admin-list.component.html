@@ -18,47 +18,25 @@
           <!-- ID Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>Serial#</th>
-            <td mat-cell *matCellDef="let row; let index = index">
-              {{ index + 1 }}
-            </td>
+            <td mat-cell *matCellDef="let row">{{ row._id }}</td>
           </ng-container>
           <!-- Progress Column -->
           <ng-container matColumnDef="party-name">
-            <th mat-header-cell *matHeaderCellDef>Party Name</th>
+            <th mat-header-cell *matHeaderCellDef>Email</th>
             <td
               mat-cell
               *matCellDef="let row; let index = index"
-              [routerLink]="'/admin/party-list/' + row._id"
+              [routerLink]="'/admin/party-list/' + (index + 1)"
             >
-              {{ row.party_name }}
+              {{ row.email }}
             </td>
           </ng-container>
 
           <!-- Name Column -->
           <ng-container matColumnDef="admin">
-            <th mat-header-cell *matHeaderCellDef>Party Admin</th>
+            <th mat-header-cell *matHeaderCellDef>Admin Name</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.party_admin.first_name }}
-              {{ row.party_admin.last_name }}
-            </td>
-          </ng-container>
-
-          <!-- Fruit Column -->
-          <ng-container matColumnDef="members">
-            <th mat-header-cell *matHeaderCellDef>Total Members</th>
-            <td mat-cell *matCellDef="let row">{{ row.members?.length }}</td>
-          </ng-container>
-          <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>Total Members</th>
-            <td mat-cell *matCellDef="let row">
-              <button
-                *ngIf="!row?.approved"
-                mat-raised-button
-                color="accent"
-                (click)="approveParty(row._id)"
-              >
-                Approve Party
-              </button>
+              {{ row.first_name }}{{ row.last_name }}
             </td>
           </ng-container>
 
