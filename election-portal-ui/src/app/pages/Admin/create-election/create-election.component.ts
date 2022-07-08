@@ -15,6 +15,7 @@ export class CreateElectionComponent implements OnInit {
   PARTY: any = parties;
   title = '';
   date: any = new Date();
+  today: any = new Date();
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
