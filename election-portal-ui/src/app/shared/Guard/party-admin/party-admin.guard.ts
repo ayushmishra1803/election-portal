@@ -27,7 +27,7 @@ export class PartyAdminGuard implements CanActivate {
     | UrlTree {
     return this.userInforService.UserData.pipe(
       map((userData: any) => {
-        if (userData && userData.user_type === 'party-admin') {
+        if (userData && userData.user_type === 'party_admin') {
           return true;
         } else {
           this.router.navigate(['/'], { replaceUrl: true });

@@ -28,7 +28,7 @@ const routes: Routes = [
       import(`./pages/user/user.module`).then((m) => m.UserModule),
   },
   {
-    path: 'party-admin',
+    path: 'party_admin',
     canActivate: [PartyAdminGuard],
     loadChildren: () =>
       import(`./pages/party-admin/party-admin.module`).then(

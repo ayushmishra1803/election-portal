@@ -72,8 +72,8 @@
                   {{ selectedParty.value?.length === 2 ? "other" : "others" }})
                 </span>
               </mat-select-trigger>
-              <mat-option *ngFor="let topping of PARTY" [value]="topping">{{
-                topping
+              <mat-option *ngFor="let topping of PARTY" [value]="topping._id">{{
+                topping.party_name
               }}</mat-option>
             </mat-select>
           </mat-form-field>

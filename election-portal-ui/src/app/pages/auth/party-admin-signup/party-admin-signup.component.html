@@ -3,12 +3,7 @@
   <div class="form-outline mb-4">
     <mat-label>First Name</mat-label>
     <mat-form-field class="w-100" appearance="outline">
-      <input
-        matInput
-        formControlName="first_name"
-        type="text"
-        placeholder="Placeholder"
-      />
+      <input matInput formControlName="first_name" type="text" />
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
   </div>
@@ -16,12 +11,7 @@
   <div class="form-outline mb-4">
     <mat-label>Last Name</mat-label>
     <mat-form-field class="w-100" appearance="outline">
-      <input
-        matInput
-        formControlName="last_name"
-        type="text"
-        placeholder="Placeholder"
-      />
+      <input matInput formControlName="last_name" type="text" />
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
   </div>
@@ -29,12 +19,7 @@
   <div class="form-outline mb-4">
     <mat-label>Email</mat-label>
     <mat-form-field class="w-100" appearance="outline">
-      <input
-        matInput
-        formControlName="email"
-        type="email"
-        placeholder="Placeholder"
-      />
+      <input matInput formControlName="email" type="email" />
       <mat-icon matSuffix>mail</mat-icon>
     </mat-form-field>
   </div>
@@ -47,7 +32,6 @@
         matInput
         formControlName="password"
         [type]="showPassword ? 'text' : 'password'"
-        placeholder="Placeholder"
       />
       <mat-icon
         (click)="showPassword = !showPassword"

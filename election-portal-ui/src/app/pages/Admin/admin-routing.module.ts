@@ -6,8 +6,10 @@ import { AdminListComponent } from './admin-list/admin-list.component';
 import { CreateElectionComponent } from './create-election/create-election.component';
 import { ElectionDetailsComponent } from './election-details/election-details.component';
 import { ListElectionsComponent } from './list-elections/list-elections.component';
+import { PartyAdminListComponent } from './party-admin-list/party-admin-list.component';
 import { PartyDetailsComponent } from './party-details/party-details.component';
 import { PartyListComponent } from './party-list/party-list.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,14 @@ const routes: Routes = [
       {
         path: 'password',
         component: AddPartyMembersComponent,
+      },
+      {
+        path: 'users',
+        component: UsersListComponent,
+      },
+      {
+        path: 'party_admins',
+        component: PartyAdminListComponent,
       },
     ],
   },

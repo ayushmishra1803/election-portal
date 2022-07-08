@@ -26,6 +26,8 @@ export class HeaderComponent implements OnInit {
     });
   }
   toggleSidebar() {
+    console.log('toggle');
+
     this.toggleSidebarEvent.emit('toggle');
   }
   logout() {
