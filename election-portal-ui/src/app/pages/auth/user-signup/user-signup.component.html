@@ -1,1 +1,85 @@
-<p>user-signup works!</p>
+<form [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()">
+  <h1>Register</h1>
+  <!-- First Name input -->
+  <div class="form-outline mb-4">
+    <mat-label>First Name</mat-label>
+    <mat-form-field class="w-100" appearance="outline">
+      <input
+        matInput
+        formControlName="first_name"
+        type="text"
+        placeholder="Placeholder"
+      />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+  </div>
+  <!-- Last Name input -->
+  <div class="form-outline mb-4">
+    <mat-label>Last Name</mat-label>
+    <mat-form-field class="w-100" appearance="outline">
+      <input
+        matInput
+        formControlName="last_name"
+        type="text"
+        placeholder="Placeholder"
+      />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+  </div>
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <mat-label>Email</mat-label>
+    <mat-form-field class="w-100" appearance="outline">
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        placeholder="Placeholder"
+      />
+      <mat-icon matSuffix>mail</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Password input -->
+  <div class="form-outline mb-3">
+    <mat-label>Password</mat-label>
+    <mat-form-field class="w-100" appearance="outline">
+      <input
+        matInput
+        formControlName="password"
+        [type]="showPassword ? 'text' : 'password'"
+        placeholder="Placeholder"
+      />
+      <mat-icon
+        (click)="showPassword = !showPassword"
+        *ngIf="!showPassword"
+        matSuffix
+        >visibility</mat-icon
+      >
+      <mat-icon
+        (click)="showPassword = !showPassword"
+        *ngIf="showPassword"
+        matSuffix
+        >visibility_off</mat-icon
+      >
+    </mat-form-field>
+  </div>
+  <div class="text-center mt-4 pt-2">
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg"
+      style="padding-left: 2.5rem; padding-right: 2.5rem"
+      [disabled]="signUpForm.invalid"
+    >
+      Register
+    </button>
+    <p class="small fw-bold mt-2 pt-1 mb-0">
+      Register as a party leader?
+      <a routerLink="/auth/leader-register" class="link-primary">Register</a>
+    </p>
+    <p class="small fw-bold mt-2 pt-1 mb-0">
+      Already have an account?
+      <a routerLink="/auth/login" class="link-primary">Login</a>
+    </p>
+  </div>
+</form>

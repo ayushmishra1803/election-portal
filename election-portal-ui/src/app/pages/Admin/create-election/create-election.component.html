@@ -1,0 +1,94 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Host Election</mat-card-title>
+    <mat-card-subtitle>Add a new Election</mat-card-subtitle>
+    <mat-card-content>
+      <form>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Election Date</mat-label>
+            <input
+              name="date"
+              [(ngModel)]="date"
+              [min]="today"
+              matInput
+              [matDatepicker]="picker"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Election Title</mat-label>
+            <input
+              name="title"
+              [(ngModel)]="title"
+              matInput
+              placeholder="Placeholder"
+            />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </p>
+        <!--  <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Select Colleges who can vote</mat-label>
+            <mat-select [formControl]="selectedCollege" multiple>
+              <mat-select-trigger>
+                {{selectedCollege.value?.[0] || ''}}
+                <span
+                  *ngIf="(selectedCollege.value?.length || 0) > 1"
+                  class="example-additional-selection"
+                >
+                  (+{{ (selectedCollege.value?.length || 0) - 1 }}
+                  {{
+                    selectedCollege.value?.length === 2 ? "other" : "others"
+                  }})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let topping of colleges" [value]="topping">{{
+                topping
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p> -->
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Select Parties</mat-label>
+            <mat-select [formControl]="selectedParty" multiple>
+              <mat-select-trigger>
+                {{selectedParty.value?.[0] || ''}}
+                <span
+                  *ngIf="(selectedParty.value?.length || 0) > 1"
+                  class="example-additional-selection"
+                >
+                  (+{{ (selectedParty.value?.length || 0) - 1 }}
+                  {{ selectedParty.value?.length === 2 ? "other" : "others" }})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let topping of PARTY" [value]="topping">{{
+                topping
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="!selectedParty.value || !title || !date"
+        (click)="navigate()"
+      >
+        Submit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

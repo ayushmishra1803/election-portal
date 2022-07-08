@@ -1,0 +1,25 @@
+<section class="h-100 auth-wrap">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img
+          src="https://consultport.com/wp-content/uploads/2021/05/103-049.1.png"
+          class="img-fluid"
+          alt="Sample image"
+        />
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <mat-card>
+          <mat-card-title>Party Admin Profile</mat-card-title>
+          <mat-card-subtitle>User Details</mat-card-subtitle>
+          <mat-card-content *ngIf="userData">
+            <h3>
+              <b>Name</b> : {{ userData?.first_name }} {{ userData?.last_name }}
+            </h3>
+            <h3><b>Email</b> : {{ userData?.email }}</h3>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

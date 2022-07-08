@@ -1,0 +1,41 @@
+<div class="container">
+  <mat-card>
+    <div align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/admin/add-election"
+      >
+        Add Election
+      </button>
+    </div>
+    <mat-card-title>Election List</mat-card-title>
+    <mat-card-subtitle>List Of All The elections</mat-card-subtitle>
+    <mat-card-content>
+      <div>
+        <mat-card
+          *ngFor="let election of users"
+          style="border: 1px solid lightgrey; margin-bottom: 20px"
+        >
+          <mat-card-title>Election Title : {{ election.party }}</mat-card-title>
+          <mat-card-subtitle
+            >Election Date : {{ election.date | date }}</mat-card-subtitle
+          >
+          <mat-card-content>
+            <h4
+              [ngClass]="
+                election.status === 'Upcoming' ||
+                election.status === 'Completed' ||
+                election.status === 'Active'
+                  ? 'primary'
+                  : 'accent'
+              "
+            >
+              {{ election.status }}
+            </h4>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

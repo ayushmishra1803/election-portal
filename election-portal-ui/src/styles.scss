@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Snack BAr Classes */
+.danger {
+  background-color: red;
+  color: white;
+}
+.success {
+  background-color: rgb(76, 175, 80);
+  color: white;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+.mat-card {
+  border-radius: 20px !important;
+  box-shadow: none !important;
+  width: 100%;
+}

@@ -1,0 +1,50 @@
+<div class="container">
+  <div *ngFor="let election of users; let electionIndex = index">
+    <mat-card *ngIf="election.status === 'Active' && !election?.voted">
+      <mat-card-title>{{ election?.party }}</mat-card-title>
+      <mat-card-subtitle>Vote for one of the following</mat-card-subtitle>
+      <mat-card-content>
+        <mat-list role="list">
+          <mat-list-item
+            *ngFor="let party of users | slice: 0:3; let index = index"
+            role="listitem"
+          >
+            <mat-card style="border: 1px solid lightgrey; margin-bottom: 20px">
+              <mat-card-title
+                style="display: flex; justify-content: space-between"
+                >{{ members[index] + " " + members[index + 10] }} (
+                {{ parties[index] }} )
+                <button
+                  *ngIf="selectedParty === members[index]"
+                  color="primary"
+                  mat-raised-button
+                >
+                  Voted
+                </button>
+                <button
+                  *ngIf="selectedParty != members[index]"
+                  (click)="selectedParty = members[index]"
+                  mat-raised-button
+                >
+                  Select
+                </button>
+              </mat-card-title>
+            </mat-card>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-footer>
+        <button
+          mat-raised-button
+          [disabled]="selectedParty === ''"
+          (click)="submit(electionIndex)"
+        >
+          Submit
+        </button>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+  <mat-card *ngIf="getUsers().length == 0">
+    <mat-card-subtitle>No Election Available</mat-card-subtitle>
+  </mat-card>
+</div>
