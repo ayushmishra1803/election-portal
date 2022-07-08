@@ -6,7 +6,6 @@ const PartAdminMiddleware = require("../middleware/party-admin-auth.middleware")
 const GeneralMiddleware = require("../middleware/general.middleware");
 const UserAuthMiddleware = require("../middleware/User-Auth-Middleware");
 PartyRoutes.post(`/create-party`, async (req, res) => {
-  
   try {
     const party = new PartyModel({ ...req.body, approved: false });
     if (!party) {
@@ -38,20 +37,40 @@ PartyRoutes.get(`/parties`, AdminMiddleware, async (req, res) => {
     res.status(400).send({ message: err.message });
   }
 });
-PartyRoutes.patch("/add-member/:memberId", async (req, res) => {
-  try {
-    const { memberId } = req.params;
-    const partyDetails = await PartyModel.find({ party_admin: req.user._id });
-    if (!partyDetails) {
-      throw new Error("Party detials not found");
+/* add member in the party */
+PartyRoutes.patch(
+  "/add-member/:memberId",
+  PartAdminMiddleware,
+  async (req, res) => {
+    try {
+      const partyAdmin = req.user;
+
+      const partyDetails = await PartyModel.find({ party_admin: req.user._id });
+
+      const members = partyDetails[0].members ? partyDetails[0].members : [];
+
+      members.push({UserId:req.params.memberId});
+      partyDetails[0].members = members;
+      const saved = await partyDetails[0].save();
+      if (!saved) {
+        throw new Error("User not added");
+      }
+      res
+        .status(200)
+        .send({
+          message: "User Added as a party Member",
+          data: partyDetails[0],
+        });
+    } catch (err) {
+      res.status(500).send({ message: err.message });
     }
-  } catch (err) {}
-});
+  }
+);
 
 //get party details
 PartyRoutes.get(`/deatils`, GeneralMiddleware, async (req, res) => {
   try {
-    const partyDetails = await PartyModel.find({ party_admin: req.user._id });
+    const partyDetails = await PartyModel.find({ party_admin: req.user._id }).populate('party_admin')
     if (!partyDetails) {
       throw new Error("User not a admin for any of the party");
     }
@@ -60,7 +79,7 @@ PartyRoutes.get(`/deatils`, GeneralMiddleware, async (req, res) => {
       .send({ message: "Party Details Fetched", data: partyDetails });
   } catch (err) {
     res.status(400).send({
-      messgae: err.message,
+      message: err.message,
     });
   }
 });
@@ -68,7 +87,6 @@ PartyRoutes.get(`/deatils`, GeneralMiddleware, async (req, res) => {
 //request to join party
 PartyRoutes.patch(`/request/:partyId`, UserAuthMiddleware, async (req, res) => {
   try {
-    console.log(req.params.partyId);
     const party = await PartyModel.find({ _id: req.params.partyId });
     const Alreadymember = await PartyModel.find({
       members: { $elemMatch: { UserId: req.user._id } },
@@ -82,7 +100,6 @@ PartyRoutes.patch(`/request/:partyId`, UserAuthMiddleware, async (req, res) => {
         UserId: req.user._id,
       };
       party[0].members.push(member);
-      console.log(party);
     }
     const saved = party[0].save();
     if (!saved) {
@@ -97,22 +114,23 @@ PartyRoutes.patch(`/request/:partyId`, UserAuthMiddleware, async (req, res) => {
 //approve user
 PartyRoutes.get(`/approve/:userId`, PartAdminMiddleware, async (req, res) => {
   try {
-    console.log(req.params);
-    const party=await PartyModel.find({party_admin:req.user._id})
-   
-     const updatedIndex=party[0].members.findIndex(member=>member.UserId == req.params.userId)
-     console.log(party,updatedIndex);
-     party[0].members[updatedIndex].approved=true 
-        const saved=await party[0].save();
-    if(!saved){
-      throw new Error("Member not approved")
+    const party = await PartyModel.find({ party_admin: req.user._id });
+
+    const updatedIndex = party[0].members.findIndex(
+      (member) => member.UserId == req.params.userId
+    );
+
+    party[0].members[updatedIndex].approved = true;
+    const saved = await party[0].save();
+    if (!saved) {
+      throw new Error("Member not approved");
     }
     res.status(200).send({
-      message:'Memeber approved to join party',data:party[0]
-    })
-   
+      message: "Memeber approved to join party",
+      data: party[0],
+    });
   } catch (err) {
-res.status(500).send({message:err.message})
+    res.status(500).send({ message: err.message });
   }
 });
 module.exports = PartyRoutes;
